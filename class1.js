@@ -26,7 +26,6 @@ page.open('https://www.baidu.com/s?ie=UTF-8&wd='+keyword, function () {
 	} else {
 		// waitFor(testFx, onReady, timeOutMillis)
 		waitFor(
-
 			function () {
 				return page.evaluate(function () {
 					//判断页面加载完成的信号,
@@ -85,22 +84,20 @@ function waitFor(testFx, onReady, timeOutMillis) {
 		condition = false,
 		interval = setInterval(function () {
 			if ((new Date().getTime() - start < maxtimeOutMillis) && !condition) {
-				// If not time-out yet and condition not yet fulfilled
+				// 网页截图
 				// screan('./snapshot/baidu.png');
 				// console.log('截图')
-				// list的长度 > 0
 				condition = (typeof (testFx) === "string" ? eval(testFx) : testFx()); //< defensive code 防御性编码、
 			} else {
 				if (!condition) {
-					// If condition still not fulfilled (timeout but condition is 'false')
+					//等待超时
 					// console.log("'waitFor()' timeout");
 					
 					phantom.exit(1);
 				} else {
-					// Condition fulfilled (timeout and/or condition is 'true')
+					// 完成时间
 					// console.log("'waitFor()' finished in " + (new Date().getTime() - start) + "ms.");
 
-					//< Do what it's supposed to do once the condition is fulfilled 做它应该做的条件一旦满足
 					typeof (onReady) === "string" ? eval(onReady) : onReady(); 
 					clearInterval(interval); //< Stop this interval
 				}
@@ -111,11 +108,8 @@ function waitFor(testFx, onReady, timeOutMillis) {
 
 
 page.onConsoleMessage = function (msg, lineNum, sourceId) {
-	// console.log('CONSOLE:' + msg);
 	var dataList = '';
 	var t = Date.now() - page.startTime;
-	// var re = new RegExp("^[mydata]");
-	// var arr = (msg.match(re));
 	var data = {
 			code: 1, //返回状态码，1为成功，0为失败
 			msg: '抓取成功', //返回的信息
@@ -125,7 +119,6 @@ page.onConsoleMessage = function (msg, lineNum, sourceId) {
 		}
 	if (msg.match(/^[mydata]/)!= null) {
 		dataList = msg.replace("mmydata", "")
-		// console.log(dataList);
 		data.dataList =JSON.parse(dataList);
 		console.log(JSON.stringify(data))
 	}
