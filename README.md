@@ -23,8 +23,8 @@
 		dataList:[	//抓取结果列表
 			{
 				title: 'xx',  //结果条目的标题
-				info: ‘’, //摘要
-				link: ‘’, //链接			
+				info: '', //摘要
+				link: '', //链接			
 				pic: '' //缩略图地址
 				}
 		]
@@ -40,9 +40,7 @@
 
 > phantomjs class1.js tianqi
 
-------
-
-------
+---
 
 #class2.js
 
@@ -69,5 +67,7 @@
 ### 用法:
 
 > phantomjs class2.js tianqi iphone5
+
 > phantomjs class2.js tianqi iphone6
+
 > phantomjs class2.js tianqi ipad
